@@ -1,0 +1,50 @@
+{
+  "name": "PACKAGE_NAME",
+  "description": "PACKAGE_DESCRIPTION",
+  "version": "0.1.0",
+  "homepage": "https://www.projectwallace.com/oss",
+  "repository": "PACKAGE_REPOSITORY",
+  "issues": "PACKAGE_ISSUES",
+  "license": "MIT",
+  "author": "Bart Veneman",
+  "keywords": [
+    "PACKAGE_KEYWORD"
+  ],
+  "scripts": {
+    "test": "xo && nyc ava test"
+  },
+  "main": "./src/index.js",
+  "files": [
+    "src"
+  ],
+  "engines": {
+    "node": ">=8.0"
+  },
+  "devDependencies": {
+    "ava": "^1.4.0",
+    "nyc": "^13.3.0",
+    "prettier": "^1.16.4",
+    "xo": "^0.24.0"
+  },
+  "xo": {
+    "prettier": true
+  },
+  "prettier": {
+    "useTabs": true,
+    "semi": false,
+    "singleQuote": true,
+    "bracketSpacing": false,
+    "proseWrap": "always",
+    "overrides": [
+      {
+        "files": [
+          "*.json",
+          "*.md"
+        ],
+        "options": {
+          "useTabs": false
+        }
+      }
+    ]
+  }
+}
