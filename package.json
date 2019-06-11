@@ -1,14 +1,18 @@
 {
-  "name": "PACKAGE_NAME",
-  "description": "PACKAGE_DESCRIPTION",
+  "name": "css-selector-complexity",
+  "description": "Calculate the Cyclomatic Complexity of a CSS selector",
   "version": "0.1.0",
   "homepage": "https://www.projectwallace.com/oss",
-  "repository": "PACKAGE_REPOSITORY",
-  "issues": "PACKAGE_ISSUES",
+  "repository": "https://github.com/bartveneman/css-selector-complexity",
+  "issues": "https://github.com/bartveneman/css-selector-complexity/issues",
   "license": "MIT",
   "author": "Bart Veneman",
   "keywords": [
-    "PACKAGE_KEYWORD"
+    "css",
+    "selector",
+    "cyclomatic",
+    "complexity",
+    "projectwallace"
   ],
   "scripts": {
     "test": "xo && nyc ava test"
@@ -21,8 +25,8 @@
     "node": ">=8.0"
   },
   "devDependencies": {
-    "ava": "^1.4.0",
-    "nyc": "^13.3.0",
+    "ava": "^2.1.0",
+    "nyc": "^14.1.1",
     "prettier": "^1.16.4",
     "xo": "^0.24.0"
   },
@@ -30,11 +34,11 @@
     "prettier": true
   },
   "prettier": {
+    "proseWrap": "always",
     "useTabs": true,
     "semi": false,
     "singleQuote": true,
     "bracketSpacing": false,
-    "proseWrap": "always",
     "overrides": [
       {
         "files": [
@@ -46,5 +50,8 @@
         }
       }
     ]
+  },
+  "dependencies": {
+    "scalpel": "^3.0.0"
   }
 }
