@@ -2,12 +2,14 @@ const test = require('ava')
 const complexity = require('.')
 
 test('it only expects strings', t => {
-	const provider = [1, null, undefined, -1, {}, [], false, '']
-
-	provider.map(notSelector => t.throws(() => complexity(notSelector)))
+	t.throws(() => complexity(1))
+	t.throws(() => complexity(null))
+	t.throws(() => complexity(undefined))
+	t.throws(() => complexity([]))
+	t.throws(() => complexity(''))
 })
 
-test('it counts simple selectors', t => {
+test('it calculates simple selectors', t => {
 	const provider = [
 		[1, '.class'],
 		[1, 'element'],
@@ -16,9 +18,9 @@ test('it counts simple selectors', t => {
 		[0, '* + *']
 	]
 
-	provider.map(([expected, selector]) => {
+	provider.forEach(([expected, selector]) => {
 		const actual = complexity(selector)
-		return t.is(
+		t.is(
 			actual,
 			expected,
 			`Expected ${selector} to have complexity of ${expected}, found ${actual}`
@@ -26,7 +28,7 @@ test('it counts simple selectors', t => {
 	})
 })
 
-test('it counts combined selectors', t => {
+test('it calculates combined selectors', t => {
 	const provider = [
 		[3, '.class .within .class'],
 		[2, 'ul > li'],
@@ -37,9 +39,9 @@ test('it counts combined selectors', t => {
 		[4, '.class#id[attribute=value]']
 	]
 
-	provider.map(([expected, selector]) => {
+	provider.forEach(([expected, selector]) => {
 		const actual = complexity(selector)
-		return t.is(
+		t.is(
 			actual,
 			expected,
 			`Expected ${selector} to have complexity of ${expected}, found ${actual}`
@@ -47,7 +49,7 @@ test('it counts combined selectors', t => {
 	})
 })
 
-test('it counts pseudo selectors', t => {
+test('it calculates pseudo selectors', t => {
 	const provider = [
 		[2, 'p:first-child'],
 		[2, 'a :only-child'],
@@ -57,9 +59,9 @@ test('it counts pseudo selectors', t => {
 		[3, 'a:matches(.class) b']
 	]
 
-	provider.map(([expected, selector]) => {
+	provider.forEach(([expected, selector]) => {
 		const actual = complexity(selector)
-		return t.is(
+		t.is(
 			actual,
 			expected,
 			`Expected ${selector} to have complexity of ${expected}, found ${actual}`
@@ -67,7 +69,7 @@ test('it counts pseudo selectors', t => {
 	})
 })
 
-test('it counts attribute selectors', t => {
+test('it calculates attribute selectors', t => {
 	const provider = [
 		// 6.3.1 Attribute presence and value selectors
 		[1, '[aria-hidden]'],
@@ -82,9 +84,9 @@ test('it counts attribute selectors', t => {
 		[3, '[property][property="value"]']
 	]
 
-	provider.map(([expected, selector]) => {
+	provider.forEach(([expected, selector]) => {
 		const actual = complexity(selector)
-		return t.is(
+		t.is(
 			actual,
 			expected,
 			`Expected ${selector} to have complexity of ${expected}, found ${actual}`
@@ -92,7 +94,7 @@ test('it counts attribute selectors', t => {
 	})
 })
 
-test('it counts insane real-world cases', t => {
+test('it calculates insane real-world cases', t => {
 	const provider = [
 		// Carbon Design System
 		[
@@ -116,9 +118,9 @@ test('it counts insane real-world cases', t => {
 		]
 	]
 
-	provider.map(([expected, selector]) => {
+	provider.forEach(([expected, selector]) => {
 		const actual = complexity(selector)
-		return t.is(
+		t.is(
 			actual,
 			expected,
 			`Expected ${selector} to have complexity of ${expected}, found ${actual}`
