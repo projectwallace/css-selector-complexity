@@ -28,6 +28,9 @@ console.log(complexity('.my > #brutal ~ [css]:first-child + selector'))
 
 ## Related projects
 
-- [RELATED_PACKAGE_1](RELATED_PACKAGE_1_URL)
-- [RELATED_PACKAGE_2](RELATED_PACKAGE_2_URL)
-- [RELATED_PACKAGE_3](RELATED_PACKAGE_3_URL)
+- **[Wallace CLI](https://github.com/bartveneman/wallace-cli)**<br>CSS Analytics
+  in your terminal
+- **[Constyble](https://github.com/bartveneman/constyble)**<br>CSS Complexity
+  Linter
+- **[css-analyzer](https://github.com/projectwallace/css-analyzer)**<br>Calculate
+  analytics for CSS
