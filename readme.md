@@ -26,6 +26,15 @@ console.log(complexity('.my > #brutal ~ [css]:first-child + selector'))
 //-> 5
 ```
 
+## Credits
+
+The idea for this package originated from the following blog posts:
+
+- [Cyclomatic Complexity: Logic in CSS](https://csswizardry.com/2015/04/cyclomatic-complexity-logic-in-css/)
+  by [Harry Roberts](https://github.com/csswizardry)
+- [Programming CSS](https://adactio.com/journal/14574) by
+  [Jeremy Keith](https://github.com/adactio)
+
 ## Related projects
 
 - **[Wallace CLI](https://github.com/bartveneman/wallace-cli)**<br>CSS Analytics
