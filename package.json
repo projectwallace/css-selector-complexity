@@ -15,18 +15,20 @@
     "projectwallace"
   ],
   "scripts": {
-    "test": "xo && nyc ava test"
+    "test": "xo && ava"
   },
-  "main": "./src/index.js",
+  "main": "./index.js",
   "files": [
-    "src"
+    "./index.js"
   ],
   "engines": {
     "node": ">=8.0"
   },
+  "dependencies": {
+    "css-selector-parser": "^1.3.0"
+  },
   "devDependencies": {
     "ava": "^2.1.0",
-    "nyc": "^14.1.1",
     "prettier": "^1.16.4",
     "xo": "^0.24.0"
   },
@@ -50,8 +52,5 @@
         }
       }
     ]
-  },
-  "dependencies": {
-    "scalpel": "^3.0.0"
   }
 }

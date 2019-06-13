@@ -1,23 +1,27 @@
 const test = require('ava')
-const loc = require('..')
+const complexity = require('.')
 
 test('it only expects strings', t => {
 	const provider = [1, null, undefined, -1, {}, [], false, '']
 
-	provider.map(notSelector => {
-		t.throws(() => loc(notSelector))
-	})
+	provider.map(notSelector => t.throws(() => complexity(notSelector)))
 })
 
 test('it counts simple selectors', t => {
-	const provider = [[1, '.class'], [1, 'element'], [1, '#id'], [0, '*']]
+	const provider = [
+		[1, '.class'],
+		[1, 'element'],
+		[1, '#id'],
+		[0, '*'],
+		[0, '* + *']
+	]
 
 	provider.map(([expected, selector]) => {
-		const actual = loc(selector)
-		t.is(
-			loc(selector),
+		const actual = complexity(selector)
+		return t.is(
+			actual,
 			expected,
-			`Expected ${selector} to have LOC of ${expected}, found ${actual}`
+			`Expected ${selector} to have complexity of ${expected}, found ${actual}`
 		)
 	})
 })
@@ -34,11 +38,11 @@ test('it counts combined selectors', t => {
 	]
 
 	provider.map(([expected, selector]) => {
-		const actual = loc(selector)
-		t.is(
+		const actual = complexity(selector)
+		return t.is(
 			actual,
 			expected,
-			`Expected ${selector} to have LOC of ${expected}, found ${actual}`
+			`Expected ${selector} to have complexity of ${expected}, found ${actual}`
 		)
 	})
 })
@@ -47,36 +51,43 @@ test('it counts pseudo selectors', t => {
 	const provider = [
 		[2, 'p:first-child'],
 		[2, 'a :only-child'],
-		[2, 'li:nth-child(2n+1)'], // @TODO: support spaces around operators: https://github.com/gajus/scalpel/issues/11
-		[2, 'p::first-letter']
+		[2, 'li:nth-child(2n+1)'],
+		[2, 'p::first-letter'],
+		[3, 'p:first-child::first-letter'],
+		[3, 'a:matches(.class) b']
 	]
 
 	provider.map(([expected, selector]) => {
-		const actual = loc(selector)
-		t.is(
+		const actual = complexity(selector)
+		return t.is(
 			actual,
 			expected,
-			`Expected ${selector} to have LOC of ${expected}, found ${actual}`
+			`Expected ${selector} to have complexity of ${expected}, found ${actual}`
 		)
 	})
 })
 
 test('it counts attribute selectors', t => {
 	const provider = [
+		// 6.3.1 Attribute presence and value selectors
 		[1, '[aria-hidden]'],
+		[2, '[property="value"]'],
 		[2, '[property|="value"]'],
+		[2, '[property~="value"]'],
+		// 6.3.2 Substring matching attribute selectors
 		[2, '[property^="value"]'],
 		[2, '[property$="value"]'],
 		[2, '[property*="value"]'],
-		[2, '[property="value"]']
+		// Misc.
+		[3, '[property][property="value"]']
 	]
 
 	provider.map(([expected, selector]) => {
-		const actual = loc(selector)
-		t.is(
+		const actual = complexity(selector)
+		return t.is(
 			actual,
 			expected,
-			`Expected ${selector} to have LOC of ${expected}, found ${actual}`
+			`Expected ${selector} to have complexity of ${expected}, found ${actual}`
 		)
 	})
 })
@@ -85,7 +96,7 @@ test('it counts insane real-world cases', t => {
 	const provider = [
 		// Carbon Design System
 		[
-			13, // Should be 14, but counting inside :not() is hard
+			14,
 			'.bx--side-nav--website--light .bx--side-nav__menu[role=menu] a.bx--side-nav__link[role=menuitem]:not(.bx--side-nav__link--current):not([aria-current=page]):hover .bx--side-nav__icon svg'
 		],
 		// Smashing Magazine
@@ -106,11 +117,11 @@ test('it counts insane real-world cases', t => {
 	]
 
 	provider.map(([expected, selector]) => {
-		const actual = loc(selector)
-		t.is(
+		const actual = complexity(selector)
+		return t.is(
 			actual,
 			expected,
-			`Expected ${selector} to have LOC of ${expected}, found ${actual}`
+			`Expected ${selector} to have complexity of ${expected}, found ${actual}`
 		)
 	})
 })
