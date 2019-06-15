@@ -17,9 +17,9 @@
   "scripts": {
     "test": "xo && ava"
   },
-  "main": "./index.js",
+  "main": "index.js",
   "files": [
-    "./index.js"
+    "index.js"
   ],
   "engines": {
     "node": ">=8.0"
