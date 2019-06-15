@@ -3,7 +3,7 @@
 	<p>Calculate the Cyclomatic Complexity of a CSS selector</p>
 </div>
 
-[![NPM Version](https://img.shields.io/npm/v/PACKAGE_NAME.svg)](https://www.npmjs.com/package/css-selector-complexity)
+[![NPM Version](https://img.shields.io/npm/v/css-selector-complexity.svg)](https://www.npmjs.com/package/css-selector-complexity)
 [![Weekly downloads](https://img.shields.io/npm/dw/css-selector-complexity.svg)](https://www.npmjs.com/package/css-selector-complexity)
 [![Build Status](https://travis-ci.org/bartveneman/css-selector-complexity.svg?branch=master)](https://travis-ci.org/bartveneman/css-selector-complexity)
 [![Known Vulnerabilities](https://snyk.io/test/github/bartveneman/css-selector-complexity/badge.svg)](https://snyk.io/test/github/bartveneman/css-selector-complexity)
