@@ -56,7 +56,12 @@ test('it calculates pseudo selectors', t => {
 		[2, 'li:nth-child(2n+1)'],
 		[2, 'p::first-letter'],
 		[3, 'p:first-child::first-letter'],
-		[3, 'a:matches(.class) b']
+		[3, 'a:matches(.class) b'],
+		[2, '.className:nth-child(-n+3)'],
+		[1, ':nth-child(7n+1)'],
+		[2, 'a:not(test)'],
+		[2, 'a:not(:nth-child(7n+1))'],
+		[2, 'input:not(:valid)']
 	]
 
 	provider.forEach(([expected, selector]) => {
@@ -94,24 +99,32 @@ test('it calculates attribute selectors', t => {
 	})
 })
 
+test('it throws an error on invalid selectors', t => {
+	const provider = [
+		'.toolbar_15a35>', // Producthunt example
+		'+.box-group>li', // Bol.com example
+		'.w-(20: 20%' // Trello example
+	]
+
+	provider.forEach(selector => {
+		t.throws(() => complexity(selector))
+	})
+})
+
 test('it calculates insane real-world cases', t => {
 	const provider = [
-		// Carbon Design System
 		[
 			14,
 			'.bx--side-nav--website--light .bx--side-nav__menu[role=menu] a.bx--side-nav__link[role=menuitem]:not(.bx--side-nav__link--current):not([aria-current=page]):hover .bx--side-nav__icon svg'
 		],
-		// Smashing Magazine
 		[
 			8,
 			'.dashboard-membership__desc.for-supporters li.for-members.for-smashing:not(.for-supporters) time::after'
 		],
-		// CSS Tricks
 		[
 			10,
 			'body:not(.woocommerce-page):not(.page-template-page-search-results) .overflow-table-wrap>table.overflow-table:not(.gsc-table-result):not(.gcsc-branding):not(.gsc-resultsHeader) table'
 		],
-		// Google Cloud
 		[
 			14,
 			'body.dropdown-available[data-navigation="dropdown"] .devsite-doc-set-nav-tab-container:nth-child(6) .devsite-dropdown-menu-column:nth-child(1) .devsite-nav-item:nth-child(3) a.devsite-nav-title span::after'
