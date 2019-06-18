@@ -1,7 +1,7 @@
 {
   "name": "css-selector-complexity",
   "description": "Calculate the Cyclomatic Complexity of a CSS selector",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://www.projectwallace.com/oss",
   "repository": "https://github.com/bartveneman/css-selector-complexity",
   "issues": "https://github.com/bartveneman/css-selector-complexity/issues",
